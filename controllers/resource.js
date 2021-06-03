@@ -1,17 +1,16 @@
 const Resource = require('../models/resource');
-const { isEmpty } = require('@misterjvh/is_empty_96');
+const { get } = require('../routes');
 
 //! @route    POST api/resource/create
 //! @desc     Create a resource
 exports.createResource = (req, res, next) => {
-    if (!req.body.title) {
-        return res.status(500).json({
-            serverMsg: 'You must enter a title'
-        });
-    }
+    const url = req.protocol + '://' + req.get('host');
 
     const newResource = new Resource({
         title: req.body.title,
+        description: req.body.desc,
+        ghLink: req.body.ghLink,
+        screenShots: req.files.map((file) => { return { url: url + '/images/' + file.filename }})
     });
 
     newResource.save().then((resource) => {

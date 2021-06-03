@@ -5,6 +5,20 @@ const ResourceSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
+    ghLink: {
+        type: String,
+    },
+    screenShots: [
+        {
+            url: {
+                type: String,
+            }
+        }
+    ],
     date: {
         type: Date,
         default: Date.now
