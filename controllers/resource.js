@@ -4,7 +4,7 @@ const { isEmpty } = require('@misterjvh/is_empty_96');
 //! @route    POST api/resource/create
 //! @desc     Create a resource
 exports.createResource = (req, res, next) => {
-    if (isEmpty(req.body.title)) {
+    if (!req.body.title) {
         return res.status(500).json({
             serverMsg: 'You must enter a title'
         });
