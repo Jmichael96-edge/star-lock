@@ -63,13 +63,19 @@ const renderResources = async (items) => {
         renderer.innerHTML = items.map((item, i) => {
             return `
                 <section class="resourceCard">
-                    <h4 class="resourceTitle">${item.title}</h4>
+                    <main class="wrapper" style="justify-content: space-between;">
+                        <h4 class="resourceTitle">${item.title}</h4>
+                        <p class="resourceDate">
+                            <i style="color: #47ff2f; margin-right: .3rem; font-size: 1rem;" class="fas fa-calendar-alt"></i>
+                            ${moment(item.date).format('dddd MMMM D, Y')}
+                        </p>
+                    </main>
                     <div class="divider"></div>
                     <p class="resourceDesc">${item.description}</p>
                     <main class="wrapper">
                         ${item.screenShots.map((img) => {
-                return `<img src="${img.url}" class="screenShots" />`;
-            }).join('')}
+                            return `<img src="${img.url}" class="screenShots" />`;
+                        }).join('')}
                     </main>
                     <main class="wrapper" style="justify-content: space-between;">
                         <div style="display: flex; align-items: center;">

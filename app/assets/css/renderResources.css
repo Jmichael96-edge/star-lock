@@ -18,7 +18,11 @@
     font-size: 1.4rem;
     margin: 0;
 }
-
+/* resource date */
+.resourceDate {
+    color: white;
+    font-size: .8rem;
+}
 /* description for each card */
 
 .resourceDesc {
