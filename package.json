@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "jvh-is-empty": "^1.0.0",
     "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7"

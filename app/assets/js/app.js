@@ -1,5 +1,14 @@
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     resizeNavHandler();
+
+    await fetch('/api/resource/all',{
+        method: 'GET'
+    }).then((res) => res.json())
+    .then((data) => {
+        console.log(data);
+    }).catch((err) => {
+        console.log(err);
+    });
 });
 window.onresize = function (e) {
     e.preventDefault();

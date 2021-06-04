@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ResourceSchema = mongoose.Schema({
+    category: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

@@ -14,7 +14,7 @@
 #createForm {
     width: 100%;
     display: block;
-    background-color: red;
+    background-color: #500192;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
     border-radius: 5px;
     padding: 1rem;
@@ -31,4 +31,20 @@
     outline: none;
     font-size: 1rem;
     margin: 1rem 0;
+}
+
+/* preview images */
+
+.prevImages {
+    width: 100%;
+    max-width: 8rem;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, .3);
+}
+
+/* form submit button el */
+
+#submitBtn {
+    margin: 1rem 0;
+    font-size: 1rem;
 }

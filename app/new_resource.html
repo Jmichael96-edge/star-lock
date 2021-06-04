@@ -41,10 +41,18 @@
 
     <article id="createWrapper">
         <form id="createForm">
+            <select id="category" name="category" class="input">
+                <option value="" selected>Select a category</option>
+                <option value="Resource">Resource</option>
+                <option value="Help">Help</option>
+            </select>
             <input placeholder="Title" name="title" class="input" id="title" type="text" />
             <textarea placeholder="Description" name="description" class="input" id="desc" type="text"></textarea>
             <input type="url" placeholder="Link to https://github.com" class="input" id="ghLink" name="ghLink" />
-            <input multiple type="file" name="screenShots" id="screenShots" />
+            <input multiple class="input" style="border: none; padding: 0;" type="file" name="screenShots" id="screenShots" />
+            <main id="uploadPrev" class="wrapper">
+
+            </main>
             <button id="submitBtn" type="submit">CREATE RESOURCE</button>
         </form>
     </article>
