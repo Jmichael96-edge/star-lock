@@ -1,9 +1,10 @@
 const Resource = require('../models/resource');
-const { get } = require('../routes');
 
 //! @route    POST api/resource/create
 //! @desc     Create a resource
 exports.createResource = (req, res, next) => {
+    console.log(req.body);
+    console.log('files ========== ', req.files);
     const url = req.protocol + '://' + req.get('host');
 
     const newResource = new Resource({
