@@ -109,6 +109,10 @@ document.querySelectorAll('.filterInput').forEach((el) => {
                 if (resourceArr[obj].category === select) {
                     copyArr.push(resourceArr[obj]);
                 }
+            } else if (input && select) {
+                if (resourceArr[obj].category === select && strArr.indexOf(input) > -1) {
+                    copyArr.push(resourceArr[obj]);
+                }
             }
         }
         renderResources(copyArr);
