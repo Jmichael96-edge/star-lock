@@ -1,9 +1,3 @@
-/* root element that surrounds each resource card */
-
-#renderResources {
-    /* margin-top: 5rem; */
-}
-
 /* resource card that contains all the resource data */
 
 .resourceCard {

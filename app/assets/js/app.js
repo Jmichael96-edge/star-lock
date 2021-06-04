@@ -1,4 +1,6 @@
+
 let resourceArr = [];
+
 window.addEventListener('load', async () => {
     resizeNavHandler();
 
@@ -67,8 +69,8 @@ const renderResources = async (items) => {
                     <p class="resourceDesc">${item.description}</p>
                     <main class="wrapper">
                         ${item.screenShots.map((img) => {
-                            return `<img src="${img.url}" class="screenShots" />`;
-                        }).join('')}
+                return `<img src="${img.url}" class="screenShots" />`;
+            }).join('')}
                     </main>
                     <main class="wrapper" style="justify-content: space-between;">
                         <div style="display: flex; align-items: center;">
@@ -83,20 +85,32 @@ const renderResources = async (items) => {
     }
 };
 
-document.getElementById('searchInput').addEventListener('keyup', async function (e) {
-    let val = e.target.value;
-    let copyArr = [];
-    // check if the input value is empty
-    if (val.length === 0 || !val) {
-        renderResources(resourceArr);
-    }
-    // check if typed value is included in any of the objects
-    for (let obj in resourceArr) {
-        let str = JSON.stringify(resourceArr[obj]);
-        if (str.indexOf(val) > -1) {
-            copyArr.push(resourceArr[obj]);
-        } 
-    }
+document.querySelectorAll('.filterInput').forEach((el) => {
+    el.addEventListener('input', function (e) {
 
-    renderResources(copyArr);
+        let input = $('#searchInput').val();
+        let select = $('#filterCategoryInput').val();
+
+        if (!input && !select) {
+            renderResources(resourceArr);
+            return;
+        }
+
+        let copyArr = [];
+        for (let obj in resourceArr) {
+            let strArr = JSON.stringify(resourceArr[obj]).toLocaleLowerCase();
+            // if there is not a category selected
+            // if category is not selected then just look for the index of the input value
+            if (!select || select.length === 0 || select === null) {
+                if (strArr.indexOf(input) > -1) {
+                    copyArr.push(resourceArr[obj]);
+                }
+            } else if (!input || input.length === 0 || input === null) {
+                if (resourceArr[obj].category === select) {
+                    copyArr.push(resourceArr[obj]);
+                }
+            }
+        }
+        renderResources(copyArr);
+    });
 });
