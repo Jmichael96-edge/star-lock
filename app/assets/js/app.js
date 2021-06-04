@@ -73,7 +73,7 @@ const renderResources = async (items) => {
                             <i style="color: #47ff2f;" class="fas fa-tag"></i>
                             <p class="resourceCat">${item.category}</p>
                         </div>
-                        <i class="fab fa-github"></i>
+                        <a rel="noreferrer" target="_blank" href="${item.ghLink}"><i class="fab fa-github"></i></a>
                     </main>
                 </section>
             `;
