@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const router = require('express').Router();
 const htmlRoutes = require('./htmlRoutes');
 const resource = require('./resource');
