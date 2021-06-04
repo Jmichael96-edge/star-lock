@@ -39,9 +39,18 @@
         </div>
     </div>
 
-    <article id="filterWrapper">
-        <input id="searchInput" type="text" placeholder="Search for a resource" name="searchInput" />
-    </article>
+    <main class="wrapper">
+        <article id="filterWrapper">
+            <main class="wrapper" style="justify-content: space-between;">
+                <input id="searchInput" type="text" placeholder="Search for a resource" name="searchInput" />
+                <select id="filterCategoryInput">
+                    <option selected>Select a category</option>
+                    <option value="Resource">Resource</option>
+                    <option value="Help">Help</option>
+                </select>
+            </main>
+        </article>
+    </main>
 
     <article id="renderResources" class="wrapper"></article>
 

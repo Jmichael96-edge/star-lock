@@ -30,7 +30,35 @@ html body {
 }
 
 /* wrapper containing the filter elements */
+
 #filterWrapper {
-    margin-top: 5rem;
-    
+    background-color: #500192;
+    height: auto;
+    width: 100%;
+    max-width: 60rem;
+    margin: 6rem .5rem 3rem .5rem;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+/* search input element */
+
+#searchInput {
+    border: 1px solid white;
+    padding: .3rem;
+    font-size: 1.1rem;
+    outline: none;
+    border-radius: 3px;
+}
+
+/* select category input */
+
+#filterCategoryInput {
+    font-size: 1.1rem;
+    padding: .3rem;
+    font-size: 1.1rem;
+    outline: none;
+    cursor: pointer;
+    border-radius: 3px;
 }

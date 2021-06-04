@@ -1,7 +1,7 @@
 /* root element that surrounds each resource card */
 
 #renderResources {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
 }
 
 /* resource card that contains all the resource data */
@@ -37,7 +37,7 @@
 
 .screenShots {
     width: 100%;
-    max-width: 10rem;
+    max-width: 15rem;
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
     margin: 2rem 0;
