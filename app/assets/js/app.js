@@ -2,7 +2,6 @@ let resourceArr = [];
 
 window.addEventListener('load', async () => {
     resizeNavHandler();
-
     await fetch('/api/resource/all', {
         method: 'GET'
     }).then((res) => res.json())
@@ -92,7 +91,8 @@ const renderResources = async (items) => {
 
 document.querySelectorAll('.filterInput').forEach((el) => {
     el.addEventListener('input', function (e) {
-
+        document.getElementById('noResources').style.display = 'none';
+        document.getElementById('renderResources').style.display = 'flex';
         let input = $('#searchInput').val();
         let select = $('#filterCategoryInput').val();
 
@@ -120,6 +120,11 @@ document.querySelectorAll('.filterInput').forEach((el) => {
                 }
             }
         }
-        renderResources(copyArr);
+        if (copyArr.length > 0) {
+            renderResources(copyArr);
+        } else {
+            document.getElementById('noResources').style.display = 'flex';
+            document.getElementById('renderResources').style.display = 'none';
+        }
     });
 });
