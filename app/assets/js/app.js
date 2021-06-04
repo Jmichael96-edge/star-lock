@@ -98,11 +98,11 @@ document.querySelectorAll('.filterInput').forEach((el) => {
 
         let copyArr = [];
         for (let obj in resourceArr) {
-            let strArr = JSON.stringify(resourceArr[obj]).toLocaleLowerCase();
+            let strArr = JSON.stringify(resourceArr[obj]);
             // if there is not a category selected
             // if category is not selected then just look for the index of the input value
             if (!select || select.length === 0 || select === null) {
-                if (strArr.indexOf(input) > -1) {
+                if (strArr.toLocaleLowerCase().indexOf(input) > -1 || strArr.indexOf(input) > -1) {
                     copyArr.push(resourceArr[obj]);
                 }
             } else if (!input || input.length === 0 || input === null) {
@@ -110,7 +110,7 @@ document.querySelectorAll('.filterInput').forEach((el) => {
                     copyArr.push(resourceArr[obj]);
                 }
             } else if (input && select) {
-                if (resourceArr[obj].category === select && strArr.indexOf(input) > -1) {
+                if (resourceArr[obj].category === select && strArr.toLocaleLowerCase().indexOf(input) > -1 || strArr.indexOf(input) > -1) {
                     copyArr.push(resourceArr[obj]);
                 }
             }
