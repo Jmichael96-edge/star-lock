@@ -18,9 +18,9 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.static(path.join(__dirname, './app')));
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'));
+// }
 
 app.use(routes);
 
