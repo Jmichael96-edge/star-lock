@@ -1,4 +1,3 @@
-
 let resourceArr = [];
 
 window.addEventListener('load', async () => {
