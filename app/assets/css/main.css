@@ -28,3 +28,9 @@ html body {
     border-radius: 2px;
     margin: 1rem 0;
 }
+
+/* wrapper containing the filter elements */
+#filterWrapper {
+    margin-top: 5rem;
+    
+}

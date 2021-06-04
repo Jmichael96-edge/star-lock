@@ -1,3 +1,4 @@
+let resourceArr = [];
 window.addEventListener('load', async () => {
     resizeNavHandler();
 
@@ -6,6 +7,7 @@ window.addEventListener('load', async () => {
     }).then((res) => res.json())
         .then(async (data) => {
             await renderResources(data);
+            resourceArr = [...data];
         }).catch((err) => {
             console.log(err);
         });
@@ -80,3 +82,21 @@ const renderResources = async (items) => {
         }).join('');
     }
 };
+
+document.getElementById('searchInput').addEventListener('keyup', async function (e) {
+    let val = e.target.value;
+    let copyArr = [];
+    // check if the input value is empty
+    if (val.length === 0 || !val) {
+        renderResources(resourceArr);
+    }
+    // check if typed value is included in any of the objects
+    for (let obj in resourceArr) {
+        let str = JSON.stringify(resourceArr[obj]);
+        if (str.indexOf(val) > -1) {
+            copyArr.push(resourceArr[obj]);
+        } 
+    }
+
+    renderResources(copyArr);
+});
