@@ -1,0 +1,60 @@
+/* root element that surrounds each resource card */
+
+#renderResources {
+    margin-top: 5rem;
+}
+
+/* resource card that contains all the resource data */
+
+.resourceCard {
+    width: 100%;
+    max-width: 50rem;
+    height: auto;
+    padding: 1rem;
+    background-color: #500192;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+    margin: 1rem;
+}
+
+/* title of the card */
+
+.resourceTitle {
+    color: white;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+/* description for each card */
+
+.resourceDesc {
+    color: white;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* resource images/screenshots */
+
+.screenShots {
+    width: 100%;
+    max-width: 10rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    margin: 2rem 0;
+}
+
+/* github link icon */
+
+.fa-github {
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* category text */
+
+.resourceCat {
+    color: white;
+    margin: 0 .3rem;
+    font-size: .8rem;
+}

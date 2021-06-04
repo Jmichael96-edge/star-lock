@@ -1,15 +1,16 @@
 window.addEventListener('load', async () => {
     resizeNavHandler();
 
-    await fetch('/api/resource/all',{
+    await fetch('/api/resource/all', {
         method: 'GET'
     }).then((res) => res.json())
-    .then((data) => {
-        console.log(data);
-    }).catch((err) => {
-        console.log(err);
-    });
+        .then(async (data) => {
+            await renderResources(data);
+        }).catch((err) => {
+            console.log(err);
+        });
 });
+
 window.onresize = function (e) {
     e.preventDefault();
     resizeNavHandler();
@@ -50,4 +51,32 @@ window.onscroll = () => {
         nav.style.boxShadow = '0 5px 15px rgba(0,0,0,.1)';
         scrollBtn.style.display = 'block';
     };
+};
+
+// render resource function will handle importing data to the DOM
+const renderResources = async (items) => {
+    const renderer = document.getElementById('renderResources');
+    if (items.length > 0) {
+        renderer.innerHTML = items.map((item, i) => {
+            return `
+                <section class="resourceCard">
+                    <h4 class="resourceTitle">${item.title}</h4>
+                    <div class="divider"></div>
+                    <p class="resourceDesc">${item.description}</p>
+                    <main class="wrapper">
+                        ${item.screenShots.map((img) => {
+                            return `<img src="${img.url}" class="screenShots" />`;
+                        }).join('')}
+                    </main>
+                    <main class="wrapper" style="justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <i style="color: #47ff2f;" class="fas fa-tag"></i>
+                            <p class="resourceCat">${item.category}</p>
+                        </div>
+                        <i class="fab fa-github"></i>
+                    </main>
+                </section>
+            `;
+        }).join('');
+    }
 };

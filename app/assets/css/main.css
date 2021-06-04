@@ -19,3 +19,12 @@ html body {
     margin: 0;
     padding: 0;
 }
+
+/* divider for giving an accent line */
+
+.divider {
+    width: 100%;
+    border: 1px solid #47ff2f;
+    border-radius: 2px;
+    margin: 1rem 0;
+}
