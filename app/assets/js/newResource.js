@@ -20,6 +20,18 @@ $('#createForm').on('submit', async function (e) {
     let desc = $('#desc').val();
     let ghLink = $('#ghLink').val().trim();
 
+    if (!category) {
+        await renderAlert('Select a category', true);
+        return;
+    }
+    if (!title) {
+        await renderAlert('Create a title', true);
+        return;
+    }
+    if (!desc) {
+        await renderAlert('Type a description', true);
+        return;
+    }
     const data = new FormData();
 
     if (fileArr.length > 0) {
@@ -52,4 +64,25 @@ const clearForm = async () => {
     $('#title').val('');
     $('#desc').val('');
     $('#ghLink').val('');
-};  
+};
+
+const renderAlert = async (msg, isErr) => {
+    const alert = document.getElementById('formAlert');
+    const iconWrap = document.getElementById('alertIconWrap');
+    // message section to display whats inside the alert
+    const message = document.getElementById('alertText');
+    alert.style.display = 'block';
+    message.innerHTML = msg;
+
+    // if there is no error and is for a successful message 
+    if (!isErr) {
+        iconWrap.innerHTML = '<i class="fa fa-check"></i>';
+    } else if (isErr) {
+        // if the alert is for errors
+        iconWrap.innerHTML = '<i class="fas fa-times"></i>';
+    }
+
+    setTimeout(() => {
+        alert.style.display = 'none';
+    }, 5000);
+};

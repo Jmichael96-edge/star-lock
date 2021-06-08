@@ -50,7 +50,8 @@
                 <option value="General">General</option>
             </select>
             <input placeholder="Title" name="title" class="input" id="title" type="text" />
-            <textarea rows="7" placeholder="Description" name="description" class="input" id="desc" type="text"></textarea>
+            <textarea rows="7" placeholder="Description" name="description" class="input" id="desc"
+                type="text"></textarea>
             <input type="url" placeholder="Link to https://github.com" class="input" id="ghLink" name="ghLink" />
             <input multiple class="input" style="border: none; padding: 0;" type="file" name="screenShots"
                 id="screenShots" />
@@ -60,6 +61,12 @@
             <button id="submitBtn" type="submit">CREATE RESOURCE</button>
         </form>
     </article>
+
+    <!-- ! FORM ALERT -->
+    <div id="formAlert" class="alert-success rounded wrapper">
+        <div id="alertIconWrap"></div>
+        <p id="alertText"></p>
+    </div>
 
     <!-- jquery -->
     <script type="text/javascript" src="../assets/lib/jquery-3.5.1.min.js"></script>

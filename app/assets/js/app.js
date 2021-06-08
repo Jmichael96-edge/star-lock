@@ -6,6 +6,9 @@ window.addEventListener('load', async () => {
         method: 'GET'
     }).then((res) => res.json())
         .then(async (data) => {
+            if (!data || data.length < 0) {
+                return;
+            }
             await renderResources(data);
             resourceArr = [...data];
         }).catch((err) => {
