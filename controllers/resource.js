@@ -37,6 +37,7 @@ exports.fetchAll = (req, res, next) => {
                     serverMsg: 'There are currently no resources'
                 });
             }
+            console.log(items);
             return res.status(200).json(items);
         })
         .catch((err) => {

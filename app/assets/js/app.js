@@ -75,9 +75,7 @@ const renderResources = async (items) => {
                     <div class="divider"></div>
                     <p class="resourceDesc">${item.description}</p>
                     <main class="wrapper">
-                        ${item.screenShots.map((img) => {
-                            return `<img src="${img.url}" class="screenShots" />`;
-                        }).join('')}
+                    ${renderImages(item.screenShots)}
                     </main>
                     <main class="wrapper" style="justify-content: space-between;">
                         <div style="display: flex; align-items: center;">
@@ -90,6 +88,16 @@ const renderResources = async (items) => {
             `;
         }).join('');
     }
+};
+
+// render images in the resources accordingly
+const renderImages = (images) => {
+    if (!images || images.length <= 0) {
+        return ``;
+    }
+    return images.map((img) => {
+        return `<img src="${img.url}" class="screenShots" />`;
+    }).join('');
 };
 
 document.querySelectorAll('.filterInput').forEach((el) => {
