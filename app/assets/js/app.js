@@ -44,17 +44,17 @@ function closeNav() {
 // adding navbar effect for changing color on scroll
 window.onscroll = () => {
     const nav = document.getElementById('nav');
-    const scrollBtn = document.getElementById('scrollTopIcon');
+    // const scrollBtn = document.getElementById('scrollTopIcon');
 
     if (this.scrollY <= 300) {
         nav.style.height = '4rem';
         nav.style.boxShadow = 'none';
-        scrollBtn.style.display = 'none';
+        // scrollBtn.style.display = 'none';
     }
     else {
         nav.style.height = '3.5rem';
         nav.style.boxShadow = '0 5px 15px rgba(0,0,0,.1)';
-        scrollBtn.style.display = 'block';
+        // scrollBtn.style.display = 'block';
     };
 };
 
