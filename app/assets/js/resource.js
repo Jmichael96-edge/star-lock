@@ -1,4 +1,6 @@
+const resourceContainer = document.getElementById('resourceContainer');
 let isEditing = false;
+let baseResource = {};
 
 window.addEventListener('load', async () => {
     // get param id
@@ -8,7 +10,6 @@ window.addEventListener('load', async () => {
         await fetchResource(id);
     }
 });
-
 
 // fetch resource function
 const fetchResource = async (id) => {
@@ -20,7 +21,8 @@ const fetchResource = async (id) => {
                 await renderAlert(data.serverMsg, true);
                 return;
             } else if (data.status === 200) {
-                renderResource(data.resource)
+                baseResource = data.resource;
+                await renderResource(data.resource);
             }
         }).catch((err) => {
             return;
@@ -28,8 +30,7 @@ const fetchResource = async (id) => {
 };
 
 // render the resource
-const renderResource = (item) => {
-    let resourceContainer = document.getElementById('resourceContainer');
+const renderResource = async (item) => {
     resourceContainer.innerHTML = `
     <section class="resourceCard">
     <main class="wrapper" style="justify-content: space-between;">
@@ -51,7 +52,7 @@ const renderResource = (item) => {
         </div>
         <a rel="noreferrer" target="_blank" href="${item.ghLink}"><i class="fab fa-github"></i></a>
     </main>
-</section>
+    </section>
     `;
 };
 
@@ -72,13 +73,40 @@ document.getElementById('editBtn').onclick = () => {
     changeEditBtn();
 };
 
-function changeEditBtn () {
+// when the edit button is click this will trigger and handle showing the correct data when editing or not
+const changeEditBtn = async () => {
     let btn = document.getElementById('editBtn');
     if (!isEditing) {
         btn.innerHTML = 'EDIT';
+        await renderResource(baseResource);
     } else if (isEditing) {
         btn.innerHTML = 'SAVE';
+        await renderEditingForm(baseResource);
     }
+};
+
+// render the editing form
+const renderEditingForm = async (item) => {
+    resourceContainer.innerHTML = `
+        <section class="resourceCard">
+            <input class="editInput" id="editTitleInput" name="title" type="text" />
+            <select id="editCategoryInput" name="category" class="editInput">
+                <option value="" selected>Select a category</option>
+                <option value="Resource">Resource</option>
+                <option value="Docs">Docs</option>
+                <option value="Best Practices">Best Practices</option>
+                <option value="Style Guide">Style Guide</option>
+                <option value="General">General</option>
+            </select>
+            <textarea id="editDescInput" class="editInput"></textarea>
+            <input id="editGhLinkInput" class="editInput" type="text" />
+        </section>
+    `;
+    // setup the default values 
+    $('#editTitleInput').val(item.title);
+    $('#category').val(item.category);
+    $('#editDescInput').val(item.description);
+    $('#editGhLinkInput').val(item.ghLink);
 };
 
 const renderAlert = async (msg, isErr) => {
