@@ -1,0 +1,175 @@
+/* ! NEW ALERT  */
+
+.alert-success {
+    background-color: #500192;
+    position: fixed;
+    width: 80%;
+    max-width: 40rem;
+    height: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    bottom: 5%;
+    left: 50%;
+    z-index: 99;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    overflow: hidden;
+    display: none;
+    /* webkit animation */
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-name: alert-in;
+    /* moz animation */
+    -moz-animation-duration: 4s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-fill-mode: both;
+    -moz-animation-name: alert-in;
+    /* ms animation */
+    -ms-animation-duration: 4s;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-fill-mode: both;
+    -ms-animation-name: alert-in;
+    /* animation */
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-name: alert-in;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+/* alert text */
+
+#alertText {
+    width: 100%;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: -.6rem 0 0 0;
+    padding: 0;
+}
+
+#alertIconWrap {
+    text-align: center;
+    width: 40px;
+    height: 105%;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: 1px solid #47ff2f;
+    border-radius: 3px;
+    background: #47ff2f;
+}
+
+/* arrow tic */
+
+#alertIconWrap:after {
+    display: block;
+    content: '';
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    border-left: 0;
+    border-bottom: 0;
+    top: 50%;
+    right: -2px;
+    z-index: 99;
+    background: #47ff2f;
+    margin-top: -6px;
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    -moz-transform: rotate(45deg) translateY(-50%);
+    -ms-transform: rotate(45deg) translateY(-50%);
+    -o-transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
+}
+
+#alertIconWrap i {
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 100;
+    left: 66%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* ! keyframes for alert animations */
+
+@-webkit-keyframes alert-in {
+    0% {
+        transform: translateX(1000px)
+    }
+    30% {
+        transform: translateX(-50%);
+    }
+    60% {
+        transform: translateX(-50%);
+    }
+    80% {
+        transform: translateX(-65%);
+    }
+    100% {
+        transform: translateX(1000px);
+    }
+}
+
+@-moz-keyframes alert-in {
+    0% {
+        transform: translateX(1000px)
+    }
+    30% {
+        transform: translateX(-50%);
+    }
+    60% {
+        transform: translateX(-50%);
+    }
+    80% {
+        transform: translateX(-65%);
+    }
+    100% {
+        transform: translateX(1000px);
+    }
+}
+
+@-ms-keyframes alert-in {
+    0% {
+        transform: translateX(1000px)
+    }
+    30% {
+        transform: translateX(-50%);
+    }
+    60% {
+        transform: translateX(-50%);
+    }
+    80% {
+        transform: translateX(-65%);
+    }
+    100% {
+        transform: translateX(1000px);
+    }
+}
+
+@keyframes alert-in {
+    0% {
+        transform: translateX(1000px)
+    }
+    30% {
+        transform: translateX(-50%);
+    }
+    60% {
+        transform: translateX(-50%);
+    }
+    80% {
+        transform: translateX(-65%);
+    }
+    100% {
+        transform: translateX(1000px);
+    }
+}

@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/nav.css" />
+    <link rel="stylesheet" href="../assets/css/alert.css" />
+    <link rel="stylesheet" href="../assets/css/resource.css" />
 </head>
 
 <body>
@@ -20,6 +22,8 @@
             <img class="navLogo" src="../assets/images/darth.png" alt="logo" />
             <section class="navLinkWrap">
                 <a href="/" class="navLink js-link"><span class="navSpan">HOME</span></a>
+                <a class="navLink js-link"><span id="editBtn" class="navSpan">EDIT</span></a>
+                <button id="deleteBtn" class="navLink js-link">DELETE</button>
             </section>
         </div>
         <div id="mobileNav">
@@ -37,6 +41,8 @@
             <img class="mobileOverlayLogo" src="../assets/images/darth.png" alt="logo" />
         </div>
     </div>
+
+    <article id="resourceContainer" class="wrapper"></article>
 
     <!-- ! FORM ALERT -->
     <div id="formAlert" class="alert-success rounded wrapper">

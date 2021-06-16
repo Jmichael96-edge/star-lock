@@ -10,4 +10,8 @@ router.post('/create', extractScreenShots, ResourceController.createResource);
 //! @desc     Fetch all resources
 router.get('/all', ResourceController.fetchAll);
 
+//! @route    GET api/resource/fetch_resource/:id
+//! @desc     Fetch a resource
+router.get('/fetch_resource/:id', ResourceController.fetchResource);
+
 module.exports = router;
