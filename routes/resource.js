@@ -14,4 +14,8 @@ router.get('/all', ResourceController.fetchAll);
 //! @desc     Fetch a resource
 router.get('/fetch_resource/:id', ResourceController.fetchResource);
 
+//! @route    PUT api/resource/update/:id
+//! @desc     Update a resource
+router.put('/update/:id', ResourceController.updateResource);
+
 module.exports = router;
