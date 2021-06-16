@@ -1,7 +1,6 @@
 let resourceArr = [];
 
 window.addEventListener('load', async () => {
-    resizeNavHandler();
     await fetch('/api/resource/all', {
         method: 'GET'
     }).then((res) => res.json())
@@ -16,48 +15,6 @@ window.addEventListener('load', async () => {
         });
 });
 
-window.onresize = function (e) {
-    e.preventDefault();
-    resizeNavHandler();
-}
-
-function resizeNavHandler() {
-    let desktopNav = document.getElementById('desktopNav');
-    let mobileNav = document.getElementById('mobileNav');
-    if (window.innerWidth >= 1025) {
-        desktopNav.style.display = 'flex';
-        mobileNav.style.display = 'none';
-    } else if (window.innerWidth <= 1024) {
-        desktopNav.style.display = 'none';
-        mobileNav.style.display = 'flex';
-    }
-};
-
-function openNav() {
-    document.getElementById("smOpenNav").style.width = "100%";
-};
-
-function closeNav() {
-    document.getElementById("smOpenNav").style.width = "0%";
-};
-
-// adding navbar effect for changing color on scroll
-window.onscroll = () => {
-    const nav = document.getElementById('nav');
-    // const scrollBtn = document.getElementById('scrollTopIcon');
-
-    if (this.scrollY <= 300) {
-        nav.style.height = '4rem';
-        nav.style.boxShadow = 'none';
-        // scrollBtn.style.display = 'none';
-    }
-    else {
-        nav.style.height = '3.5rem';
-        nav.style.boxShadow = '0 5px 15px rgba(0,0,0,.1)';
-        // scrollBtn.style.display = 'block';
-    };
-};
-
 // render resource function will handle importing data to the DOM
 const renderResources = async (items) => {
     const renderer = document.getElementById('renderResources');
@@ -66,7 +23,7 @@ const renderResources = async (items) => {
             return `
                 <section class="resourceCard">
                     <main class="wrapper" style="justify-content: space-between;">
-                        <h4 class="resourceTitle">${item.title}</h4>
+                        <a href="/resource?id=${item._id}"><h4 class="resourceTitle">${item.title}</h4></a>
                         <p class="resourceDate">
                             <i style="color: #47ff2f; margin-right: .3rem; font-size: 1rem;" class="fas fa-calendar-alt"></i>
                             ${moment(item.date).format('dddd MMMM D, Y')}

@@ -9,4 +9,8 @@ router.get('/new_resource', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../app/new_resource.html'));
 });
 
+router.get('/resource', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../app/resource.html'));
+});
+
 module.exports = router;

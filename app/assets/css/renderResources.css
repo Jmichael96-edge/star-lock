@@ -17,12 +17,29 @@
     color: white;
     font-size: 1.4rem;
     margin: 0;
+    text-decoration: none;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
+
+.resourceTitle:focus {
+    text-decoration: none;
+}
+
+.resourceTitle:hover {
+    color: #47ff2f;
+    cursor: pointer;
+}
+
 /* resource date */
+
 .resourceDate {
     color: white;
     font-size: .8rem;
 }
+
 /* description for each card */
 
 .resourceDesc {
@@ -48,6 +65,8 @@
     font-size: 1.8rem;
     cursor: pointer;
     -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
 
@@ -64,6 +83,7 @@
 }
 
 /* no resources text */
+
 #noResources {
     display: none;
     text-align: center;
