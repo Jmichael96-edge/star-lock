@@ -5,13 +5,13 @@ const { isEmpty } = require('jvh-is-empty');
 //! @desc     Create a resource
 exports.createResource = (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
-
+    console.log(url);
     const newResource = new Resource({
         category: req.body.category,
         title: req.body.title,
         description: req.body.desc,
         ghLink: req.body.ghLink,
-        screenShots: req.files.length > 0 ? req.files.map((file) => { return { url: url + '/images/' + file.filename } }) : null
+        screenShots: req.files.length > 0 ? req.files.map((file) => { return { url: url + '/assets/images/uploads/' + file.filename } }) : null
     });
 
     newResource.save().then((resource) => {
@@ -20,7 +20,7 @@ exports.createResource = (req, res, next) => {
             resource
         });
     }).catch((err) => {
-        console.error(err);
+        console.error('ERROR ', err);
         res.status(500).json({
             serverMsg: 'There was a problem completing this request, please try again later.'
         });
