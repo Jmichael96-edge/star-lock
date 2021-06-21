@@ -1,6 +1,8 @@
 const Resource = require('../models/resource');
 const { isEmpty } = require('jvh-is-empty');
 const cloudinary = require('cloudinary').v2;
+const PROD_FOLDER = 'star_lock_uploads_prod';
+const DEV_FOLDER = 'star_lock_uploads_dev';
 
 cloudinary.config({
     cloud_name: 'edge-ofs',
@@ -11,9 +13,6 @@ cloudinary.config({
 //! @route    POST api/resource/create
 //! @desc     Create a resource
 exports.createResource = async (req, res, next) => {
-    const url = req.protocol + '://' + req.get('host');
-
-
     const newResource = new Resource({
         category: req.body.category,
         title: req.body.title,
@@ -25,7 +24,9 @@ exports.createResource = async (req, res, next) => {
         if (req.files.length > 0) {
             let imgArr = req.files;
             for (let img of imgArr) {
-                await cloudinary.uploader.upload(`images/${img.filename}`, function (err, result) {
+                await cloudinary.uploader.upload(`images/${img.filename}`, {
+                    folder: DEV_FOLDER
+                }, function (err, result) {
                     if (err) throw err;
                     resource.screenShots.push({ url: result.secure_url });
                 });
