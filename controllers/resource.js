@@ -19,21 +19,18 @@ exports.createResource = async (req, res, next) => {
         title: req.body.title,
         description: req.body.desc,
         ghLink: req.body.ghLink,
-        // screenShots: req.files.length > 0 ? req.files.map((file) => { return { url: url + '/assets/images/uploads/' + file.filename } }) : null
-        // screenShots: uploadedArr.length > 0 ? uploadedArr.map((a) => { return { url: a } }) : null
     });
 
     newResource.save().then(async (resource) => {
         if (req.files.length > 0) {
             let imgArr = req.files;
             for (let img of imgArr) {
-                await cloudinary.uploader.upload(`app/assets/images/uploads/${img.filename}`, function (err, result) {
+                await cloudinary.uploader.upload(`images/${img.filename}`, function (err, result) {
                     if (err) throw err;
                     resource.screenShots.push({ url: result.secure_url });
                 });
             }
         }
-        console.log(resource);
         await resource.save();
         res.status(201).json({
             serverMsg: 'Created resource successfully',
