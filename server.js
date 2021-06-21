@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '/app')));
+app.use(express.static(path.join(__dirname, './app')));
 
 app.use(routes);
 

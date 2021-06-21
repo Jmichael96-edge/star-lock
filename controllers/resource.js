@@ -1,20 +1,40 @@
 const Resource = require('../models/resource');
 const { isEmpty } = require('jvh-is-empty');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: 'edge-ofs',
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 //! @route    POST api/resource/create
 //! @desc     Create a resource
-exports.createResource = (req, res, next) => {
+exports.createResource = async (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
-    console.log(url);
+
+
     const newResource = new Resource({
         category: req.body.category,
         title: req.body.title,
         description: req.body.desc,
         ghLink: req.body.ghLink,
-        screenShots: req.files.length > 0 ? req.files.map((file) => { return { url: url + '/assets/images/uploads/' + file.filename } }) : null
+        // screenShots: req.files.length > 0 ? req.files.map((file) => { return { url: url + '/assets/images/uploads/' + file.filename } }) : null
+        // screenShots: uploadedArr.length > 0 ? uploadedArr.map((a) => { return { url: a } }) : null
     });
 
-    newResource.save().then((resource) => {
+    newResource.save().then(async (resource) => {
+        if (req.files.length > 0) {
+            let imgArr = req.files;
+            for (let img of imgArr) {
+                await cloudinary.uploader.upload(`app/assets/images/uploads/${img.filename}`, function (err, result) {
+                    if (err) throw err;
+                    resource.screenShots.push({ url: result.secure_url });
+                });
+            }
+        }
+        console.log(resource);
+        await resource.save();
         res.status(201).json({
             serverMsg: 'Created resource successfully',
             resource
@@ -37,7 +57,6 @@ exports.fetchAll = (req, res, next) => {
                     serverMsg: 'There are currently no resources'
                 });
             }
-            console.log(items);
             return res.status(200).json(items);
         })
         .catch((err) => {
@@ -98,10 +117,10 @@ exports.updateResource = (req, res, next) => {
             resource: item
         });
     })
-    .catch((err) => {
-        console.error(err);
-        res.status(500).json({
-            serverMsg: 'There was a problem completing this request, please try again later.'
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                serverMsg: 'There was a problem completing this request, please try again later.'
+            });
         });
-    });
 }
