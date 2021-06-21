@@ -25,7 +25,7 @@ exports.createResource = async (req, res, next) => {
             let imgArr = req.files;
             for (let img of imgArr) {
                 await cloudinary.uploader.upload(`images/${img.filename}`, {
-                    folder: DEV_FOLDER
+                    folder: PROD_FOLDER
                 }, function (err, result) {
                     if (err) throw err;
                     resource.screenShots.push({ url: result.secure_url });
@@ -121,4 +121,4 @@ exports.updateResource = (req, res, next) => {
                 serverMsg: 'There was a problem completing this request, please try again later.'
             });
         });
-}
+};
