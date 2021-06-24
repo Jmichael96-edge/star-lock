@@ -18,6 +18,7 @@ window.addEventListener('load', async () => {
 // render resource function will handle importing data to the DOM
 const renderResources = async (items) => {
     const renderer = document.getElementById('renderResources');
+    
     if (items.length > 0) {
         renderer.innerHTML = items.map((item, i) => {
             return `
@@ -30,7 +31,6 @@ const renderResources = async (items) => {
                         </p>
                     </main>
                     <div class="divider"></div>
-                    <p class="resourceDesc">${item.description}</p>
                     <main class="wrapper">
                     ${renderImages(item.screenShots)}
                     </main>

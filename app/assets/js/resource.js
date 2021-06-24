@@ -41,7 +41,9 @@ const renderResource = async (item) => {
         </p>
     </main>
     <div class="divider"></div>
-    <p class="resourceDesc">${item.description}</p>
+    <p class="resourceDesc">
+        <zero-md><template><link rel="stylesheet" href="../assets/css/markdown.css" /></template><script type="text/markdown">${item.description}</script></zero-md>
+    </p>
     <main class="wrapper">
     ${renderImages(item.screenShots)}
     </main>
