@@ -88,6 +88,7 @@ const changeEditBtn = async () => {
         btn.innerHTML = 'SAVE';
         await renderEditingForm(baseResource);
         renderCurrentImgs(currentImgArr);
+
         // render the image previews 
         document.getElementById('editScreenShots').addEventListener('change', function (e) {
             const imgPrev = document.getElementById('uploadPrev');
@@ -100,6 +101,28 @@ const changeEditBtn = async () => {
                 }).join('');
             }
         });
+
+        // save function for when a user submits the edited form
+        document.getElementById('editForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            let title = $('#editTitleInput').val();
+            let category = $('#editCategoryInput').val();
+            let desc = $('#editDescInput').val();
+            let ghLink = $('#editGhLinkInput').val().trim();
+            let editImgs = fileArr;
+            let baseImgArr = currentImgArr;
+
+            let formData = {
+                title,
+                category,
+                desc,
+                ghLink,
+                editImgs,
+                baseImgArr
+            };
+
+        });
+
     }
 };
 
@@ -141,8 +164,10 @@ const renderEditingForm = async (item) => {
                 <div style="margin: 1rem 0;">
                     <label class="editLabel">Attach New Images</label>
                     <input multiple class="editInput" style="border: none; padding: 0;" type="file" name="screenShots" id="editScreenShots" />
-                    <main id="uploadPrev" class="wrapper"></main>
+                    <main id="uploadPrev" class="wrapper" style="margin: 1rem 0;"></main>
                 </div>
+                <div class="divider"></div>
+                <button type="submit" id="editSaveBtn" class="btn">Save</button>
             </form>
         </section>
     `;
