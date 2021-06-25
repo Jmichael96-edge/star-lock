@@ -90,23 +90,37 @@ const changeEditBtn = async () => {
 // render the editing form
 const renderEditingForm = async (item) => {
     resourceContainer.innerHTML = `
-        <section class="resourceCard">
-            <input class="editInput" id="editTitleInput" name="title" type="text" />
-            <select id="editCategoryInput" name="category" class="editInput">
-                <option value="" selected>Select a category</option>
-                <option value="Resource">Resource</option>
-                <option value="Docs">Docs</option>
-                <option value="Best Practices">Best Practices</option>
-                <option value="Style Guide">Style Guide</option>
-                <option value="General">General</option>
-            </select>
-            <textarea id="editDescInput" class="editInput"></textarea>
-            <input id="editGhLinkInput" class="editInput" type="text" />
+        <section class="resourceCard wrapper">
+            <form id="editForm">
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Title</label>
+                    <input class="editInput" id="editTitleInput" name="title" type="text" />
+                </div>
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Category</label>
+                    <select id="editCategoryInput" name="category" class="editInput">
+                        <option value="" selected>Select a category</option>
+                        <option ${item.category === 'Resource' ? 'selected' : null} value="Resource">Resource</option>
+                        <option ${item.category === 'Docs' ? 'selected' : null} value="Docs">Docs</option>
+                        <option ${item.category === 'Best Practices' ? 'selected' : null} value="Best Practices">Best Practices</option>
+                        <option ${item.category === 'Style Guide' ? 'selected' : null} value="Style Guide">Style Guide</option>
+                        <option ${item.category === 'General' ? 'selected' : null} value="General">General</option>
+                    </select>
+                </div>
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Description</label>
+                    <textarea rows="15" id="editDescInput" class="editInput"></textarea>
+                </div>
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Github Link</label>
+                    <input id="editGhLinkInput" class="editInput" type="text" />
+                </div>
+                
+            </form>
         </section>
     `;
     // setup the default values 
     $('#editTitleInput').val(item.title);
-    $('#category').val(item.category);
     $('#editDescInput').val(item.description);
     $('#editGhLinkInput').val(item.ghLink);
 };

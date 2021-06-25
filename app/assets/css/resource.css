@@ -1,9 +1,11 @@
 /* container to hold the data of the resource */
+
 #resourceContainer {
     margin-top: 5rem;
 }
 
 /* delete button inside the navbar */
+
 #deleteBtn {
     font-size: 1rem;
     background-color: #47ff2f;
@@ -81,4 +83,29 @@
     color: white;
     margin: 0 .3rem;
     font-size: .8rem;
+}
+
+/* editing form element */
+
+#editForm {
+    width: 100%;
+    max-width: 40rem;
+}
+
+/* labe for all the edit inputs */
+.editLabel {
+    color: white;
+    font-size: 1.2rem;
+}
+/* editing input elements */
+
+.editInput {
+    display: block;
+    width: 100%;
+    padding: .3rem;
+    border-radius: 4px;
+    border: 1px solid white;
+    outline: none;
+    font-size: 1rem;
+    margin-top: .5rem;
 }

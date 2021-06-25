@@ -25,7 +25,8 @@ exports.createResource = async (req, res, next) => {
             let imgArr = req.files;
             for (let img of imgArr) {
                 await cloudinary.uploader.upload(`images/${img.filename}`, {
-                    folder: PROD_FOLDER
+                    folder: DEV_FOLDER,
+                    use_filename: true
                 }, function (err, result) {
                     if (err) throw err;
                     resource.screenShots.push({ url: result.secure_url });
