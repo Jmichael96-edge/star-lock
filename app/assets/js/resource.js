@@ -2,6 +2,7 @@ const resourceContainer = document.getElementById('resourceContainer');
 let isEditing = false;
 let baseResource = {};
 let currentImgArr = []
+let fileArr = [];
 
 window.addEventListener('load', async () => {
     // get param id
@@ -87,6 +88,18 @@ const changeEditBtn = async () => {
         btn.innerHTML = 'SAVE';
         await renderEditingForm(baseResource);
         renderCurrentImgs(currentImgArr);
+        // render the image previews 
+        document.getElementById('editScreenShots').addEventListener('change', function (e) {
+            const imgPrev = document.getElementById('uploadPrev');
+            if (this.files) {
+                fileArr = [...e.target.files];
+            }
+            if (fileArr.length > 0) {
+                imgPrev.innerHTML = fileArr.map((img) => {
+                    return `<img src="${URL.createObjectURL(img)}" class="prevImages" />`
+                }).join('');
+            }
+        });
     }
 };
 
@@ -124,6 +137,12 @@ const renderEditingForm = async (item) => {
                     <main id="renderCurrentImgs" class="wrapper">
                     </main>
                 </div>
+                <div class="divider"></div>
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Attach New Images</label>
+                    <input multiple class="editInput" style="border: none; padding: 0;" type="file" name="screenShots" id="editScreenShots" />
+                    <main id="uploadPrev" class="wrapper"></main>
+                </div>
             </form>
         </section>
     `;
@@ -142,16 +161,17 @@ const removeCurrentImg = (url) => {
 
 // render current images
 const renderCurrentImgs = (currentImgArr) => {
-    document.getElementById('renderCurrentImgs').innerHTML = `
+    document.getElementById('renderCurrentImgs').innerHTML = currentImgArr.length > 0 ? `
         ${currentImgArr.map((img) => {
-            return `
+        return `
             <div style="position: relative;">
                 <img alt="" class="editCurrentImg" src="${img.url}" />
                 <i onclick="removeCurrentImg('${img.url}')" class="fas fa-trash removeImgIcon"></i>
             </div>`
-        }).join('')}
-    `;
-}
+    }).join('')}
+    ` : `<h5 style="color: white; text-align: center;">All the images have been removed</h5>`;
+};
+
 const renderAlert = async (msg, isErr) => {
     const alert = document.getElementById('formAlert');
     const iconWrap = document.getElementById('alertIconWrap');

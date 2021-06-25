@@ -118,11 +118,7 @@
     width: 100%;
     max-width: 15rem;
     margin: 1rem .5rem;
-    /* position: relative; */
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    border-radius: 5px;
 }
 
 .removeImgIcon {
@@ -137,4 +133,14 @@
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: 0 10px 12px rgba(0, 0, 0, .4);
+}
+
+/* preview images */
+
+.prevImages {
+    width: 100%;
+    max-width: 12rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
 }
