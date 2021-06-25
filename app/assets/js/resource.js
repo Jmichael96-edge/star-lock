@@ -1,6 +1,7 @@
 const resourceContainer = document.getElementById('resourceContainer');
 let isEditing = false;
 let baseResource = {};
+let currentImgArr = []
 
 window.addEventListener('load', async () => {
     // get param id
@@ -26,11 +27,12 @@ const fetchResource = async (id) => {
             }
         }).catch((err) => {
             return;
-        })
+        });
 };
 
 // render the resource
 const renderResource = async (item) => {
+    currentImgArr = [...item.screenShots]
     resourceContainer.innerHTML = `
     <section class="resourceCard">
     <main class="wrapper" style="justify-content: space-between;">
@@ -84,11 +86,13 @@ const changeEditBtn = async () => {
     } else if (isEditing) {
         btn.innerHTML = 'SAVE';
         await renderEditingForm(baseResource);
+        renderCurrentImgs(currentImgArr);
     }
 };
 
 // render the editing form
 const renderEditingForm = async (item) => {
+    console.log(currentImgArr)
     resourceContainer.innerHTML = `
         <section class="resourceCard wrapper">
             <form id="editForm">
@@ -115,7 +119,11 @@ const renderEditingForm = async (item) => {
                     <label class="editLabel">Github Link</label>
                     <input id="editGhLinkInput" class="editInput" type="text" />
                 </div>
-                
+                <div style="margin: 1rem 0;">
+                    <label class="editLabel">Saved Images</label>
+                    <main id="renderCurrentImgs" class="wrapper">
+                    </main>
+                </div>
             </form>
         </section>
     `;
@@ -125,6 +133,25 @@ const renderEditingForm = async (item) => {
     $('#editGhLinkInput').val(item.ghLink);
 };
 
+// remove an image from the current image array when editing the resource
+const removeCurrentImg = (url) => {
+    let foundImg = currentImgArr.findIndex((a) => a.url === url);
+    currentImgArr.splice(foundImg, 1);
+    renderCurrentImgs(currentImgArr);
+};
+
+// render current images
+const renderCurrentImgs = (currentImgArr) => {
+    document.getElementById('renderCurrentImgs').innerHTML = `
+        ${currentImgArr.map((img) => {
+            return `
+            <div style="position: relative;">
+                <img alt="" class="editCurrentImg" src="${img.url}" />
+                <i onclick="removeCurrentImg('${img.url}')" class="fas fa-trash removeImgIcon"></i>
+            </div>`
+        }).join('')}
+    `;
+}
 const renderAlert = async (msg, isErr) => {
     const alert = document.getElementById('formAlert');
     const iconWrap = document.getElementById('alertIconWrap');

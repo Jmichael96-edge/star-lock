@@ -93,10 +93,12 @@
 }
 
 /* labe for all the edit inputs */
+
 .editLabel {
     color: white;
     font-size: 1.2rem;
 }
+
 /* editing input elements */
 
 .editInput {
@@ -108,4 +110,31 @@
     outline: none;
     font-size: 1rem;
     margin-top: .5rem;
+}
+
+/* the images that were already saved to the resource that are now being rendered in the edit section */
+
+.editCurrentImg {
+    width: 100%;
+    max-width: 15rem;
+    margin: 1rem .5rem;
+    /* position: relative; */
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.removeImgIcon {
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: .5rem;
+    left: -.2rem;
+    background-color: #47ff2f;
+    padding: .4rem;
+    height: 1.8rem;
+    width: 1.8rem;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
 }
