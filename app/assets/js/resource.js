@@ -129,8 +129,10 @@ const changeEditBtn = async () => {
                 body: formData
             }).then((res) => res.json())
             .then(async (data) => {
-                console.log(data);
-                window.location.href = `/resource?id=${id}`
+                await renderAlert(data.serverMsg, false);
+                setTimeout(() => {
+                    window.location.href = `/resource?id=${id}`;
+                }, 2000);
             }).catch((err) => {
                 console.log(err);
             });
