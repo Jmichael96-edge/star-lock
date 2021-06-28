@@ -3,6 +3,7 @@ const { isEmpty } = require('jvh-is-empty');
 const cloudinary = require('cloudinary').v2;
 const PROD_FOLDER = 'star_lock_uploads_prod';
 const DEV_FOLDER = 'star_lock_uploads_dev';
+const CLOUDINARY_DIRECTORY = DEV_FOLDER;
 
 cloudinary.config({
     cloud_name: 'edge-ofs',
@@ -25,7 +26,7 @@ exports.createResource = async (req, res, next) => {
             let imgArr = req.files;
             for (let img of imgArr) {
                 await cloudinary.uploader.upload(`images/${img.filename}`, {
-                    folder: DEV_FOLDER,
+                    folder: CLOUDINARY_DIRECTORY,
                     use_filename: true
                 }, function (err, result) {
                     if (err) throw err;
@@ -92,25 +93,50 @@ exports.fetchResource = (req, res, next) => {
 
 //! @route    PUT api/resource/update/:id
 //! @desc     Update a resource
-exports.updateResource = (req, res, next) => {
+exports.updateResource = async (req, res, next) => {
+    
+    let fetchedResource = await Resource.findById({ _id: req.params.id });
+    
+    if (!fetchedResource) {
+        return res.status(404).json({
+            serverMsg: 'Could not find the resource you were looking for'
+        });
+    }
+    
     let resourceFields = {
         category: req.body.category,
         title: req.body.title,
         description: req.body.desc,
-        ghLink: req.body.ghLink
+        ghLink: req.body.ghLink,
+        screenShots: JSON.parse(req.body.currentImgArr)
     };
 
-    Resource.findByIdAndUpdate(
+    await Resource.findByIdAndUpdate(
         { _id: req.params.id },
         { $set: resourceFields },
         { new: true, upsert: true }
-    ).then((item) => {
+    ).then(async (item) => {
         if (isEmpty(item)) {
             return res.status(404).json({
                 serverMsg: 'Could not find the resource you were looking for',
                 status: 404
             });
         }
+        
+        // add the new images
+        if (req.files.length > 0) {
+            let imgArr = req.files;
+            for (let img of imgArr) {
+                await cloudinary.uploader.upload(`images/${img.filename}`, {
+                    folder: CLOUDINARY_DIRECTORY,
+                    use_filename: true
+                }, function (err, result) {
+                    if (err) throw err;
+                    item.screenShots.push({ url: result.secure_url });
+                });
+            }
+        }
+        await item.save();
         return res.status(201).json({
             serverMsg: 'Updated resource successfully',
             resource: item

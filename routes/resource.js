@@ -16,6 +16,6 @@ router.get('/fetch_resource/:id', ResourceController.fetchResource);
 
 //! @route    PUT api/resource/update/:id
 //! @desc     Update a resource
-router.put('/update/:id', ResourceController.updateResource);
+router.put('/update/:id', extractScreenShots, ResourceController.updateResource);
 
 module.exports = router;

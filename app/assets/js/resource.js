@@ -3,11 +3,11 @@ let isEditing = false;
 let baseResource = {};
 let currentImgArr = []
 let fileArr = [];
-
+let id;
 window.addEventListener('load', async () => {
     // get param id
     let url = new URL(window.location.href);
-    let id = url.searchParams.get('id');
+    id = url.searchParams.get('id');
     if (id) {
         await fetchResource(id);
     }
@@ -85,7 +85,7 @@ const changeEditBtn = async () => {
         btn.innerHTML = 'EDIT';
         await renderResource(baseResource);
     } else if (isEditing) {
-        btn.innerHTML = 'SAVE';
+        btn.innerHTML = 'CANCEL';
         await renderEditingForm(baseResource);
         renderCurrentImgs(currentImgArr);
 
@@ -103,32 +103,44 @@ const changeEditBtn = async () => {
         });
 
         // save function for when a user submits the edited form
-        document.getElementById('editForm').addEventListener('submit', (e) => {
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             let title = $('#editTitleInput').val();
             let category = $('#editCategoryInput').val();
             let desc = $('#editDescInput').val();
             let ghLink = $('#editGhLinkInput').val().trim();
-            let editImgs = fileArr;
-            let baseImgArr = currentImgArr;
+            
+            const formData = new FormData();
 
-            let formData = {
-                title,
-                category,
-                desc,
-                ghLink,
-                editImgs,
-                baseImgArr
-            };
-
+            if (fileArr.length > 0) {
+                fileArr.forEach((img) => {
+                    formData.append('image', img)
+                });
+            }
+            
+            formData.append('category', category);
+            formData.append('title', title);
+            formData.append('desc', desc);
+            formData.append('ghLink', ghLink);
+            formData.append('currentImgArr', JSON.stringify(currentImgArr))
+            
+            await fetch(`/api/resource/update/${id}`, {
+                method: 'PUT',
+                body: formData
+            }).then((res) => res.json())
+            .then(async (data) => {
+                console.log(data);
+                window.location.href = `/resource?id=${id}`
+            }).catch((err) => {
+                console.log(err);
+            });
         });
-
     }
 };
 
 // render the editing form
 const renderEditingForm = async (item) => {
-    console.log(currentImgArr)
+    console.log(currentImgArr);
     resourceContainer.innerHTML = `
         <section class="resourceCard wrapper">
             <form id="editForm">
