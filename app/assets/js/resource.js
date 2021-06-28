@@ -109,7 +109,7 @@ const changeEditBtn = async () => {
             let category = $('#editCategoryInput').val();
             let desc = $('#editDescInput').val();
             let ghLink = $('#editGhLinkInput').val().trim();
-            
+
             const formData = new FormData();
 
             if (fileArr.length > 0) {
@@ -117,25 +117,25 @@ const changeEditBtn = async () => {
                     formData.append('image', img)
                 });
             }
-            
+
             formData.append('category', category);
             formData.append('title', title);
             formData.append('desc', desc);
             formData.append('ghLink', ghLink);
             formData.append('currentImgArr', JSON.stringify(currentImgArr))
-            
+
             await fetch(`/api/resource/update/${id}`, {
                 method: 'PUT',
                 body: formData
             }).then((res) => res.json())
-            .then(async (data) => {
-                await renderAlert(data.serverMsg, false);
-                setTimeout(() => {
-                    window.location.href = `/resource?id=${id}`;
-                }, 2000);
-            }).catch((err) => {
-                console.log(err);
-            });
+                .then(async (data) => {
+                    await renderAlert(data.serverMsg, false);
+                    setTimeout(() => {
+                        window.location.href = `/resource?id=${id}`;
+                    }, 2000);
+                }).catch((err) => {
+                    console.log(err);
+                });
         });
     }
 };
@@ -213,17 +213,22 @@ const renderCurrentImgs = (currentImgArr) => {
 
 // delete functionality 
 document.getElementById('deleteBtn').addEventListener('click', async () => {
+    openModal('Are you sure you want to delete this resource?');
+});
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
     await fetch(`/api/resource/delete/${id}`, {
         method: 'DELETE'
-    }).then((res) => res.json()) 
-    .then(async (data) => {
-        await renderAlert(data.serverMsg, false);
-        setTimeout(() => {
-            window.location.href = `/`;
-        }, 2000);
-    }).catch((err) => {
-        console.log(err);
-    });
+    }).then((res) => res.json())
+        .then(async (data) => {
+            closeModal();
+            await renderAlert(data.serverMsg, false);
+            setTimeout(() => {
+                window.location.href = `/`;
+            }, 2000);
+        }).catch((err) => {
+            console.log(err);
+        });
 });
 
 const renderAlert = async (msg, isErr) => {
@@ -246,3 +251,31 @@ const renderAlert = async (msg, isErr) => {
         alert.style.display = 'none';
     }, 5000);
 };
+
+// when the user hits the cancel button in the confirm modal
+document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
+    closeModal();
+});
+
+// x button to close the modal
+document.getElementById('close-btn').addEventListener('click', function () {
+    closeModal();
+});
+
+// overlay behind the modal to tap anywhere to close
+document.getElementById('overlay').addEventListener('click', function () {
+    closeModal();
+});
+
+// open modal function
+const openModal = (text) => {
+    document.getElementById('overlay').classList.add('is-visible');
+    document.getElementById('modal').classList.add('is-visible');
+    document.getElementById('modalText').innerHTML = text
+};
+
+// close modal function
+const closeModal = () => {
+    document.getElementById('overlay').classList.remove('is-visible');
+    document.getElementById('modal').classList.remove('is-visible');
+}

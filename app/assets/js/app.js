@@ -8,8 +8,8 @@ window.addEventListener('load', async () => {
             if (data.status === 404) {
                 return;
             }
-            await renderResources(data);
-            resourceArr = [...data];
+            await renderResources(data.items);
+            resourceArr = [...data.items];
         }).catch((err) => {
             console.log(err);
         });
@@ -96,3 +96,4 @@ document.querySelectorAll('.filterInput').forEach((el) => {
         }
     });
 });
+
