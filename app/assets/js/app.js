@@ -5,7 +5,7 @@ window.addEventListener('load', async () => {
         method: 'GET'
     }).then((res) => res.json())
         .then(async (data) => {
-            if (!data || data.length < 0) {
+            if (data.status === 404) {
                 return;
             }
             await renderResources(data);

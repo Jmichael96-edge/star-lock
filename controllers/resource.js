@@ -57,10 +57,14 @@ exports.fetchAll = (req, res, next) => {
         .then((items) => {
             if (isEmpty(items)) {
                 return res.status(404).json({
-                    serverMsg: 'There are currently no resources'
+                    serverMsg: 'There are currently no resources',
+                    status: 404
                 });
             }
-            return res.status(200).json(items);
+            return res.status(200).json({
+                items,
+                status: 200
+            });
         })
         .catch((err) => {
             console.error(err);
