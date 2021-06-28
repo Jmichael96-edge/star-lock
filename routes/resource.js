@@ -18,4 +18,8 @@ router.get('/fetch_resource/:id', ResourceController.fetchResource);
 //! @desc     Update a resource
 router.put('/update/:id', extractScreenShots, ResourceController.updateResource);
 
+//! @route    DELETE api/resource/delete/:id
+//! @desc     Delete a resource
+router.delete('/delete/:id', ResourceController.deleteResource);
+
 module.exports = router;

@@ -1,6 +1,8 @@
 const Resource = require('../models/resource');
 const { isEmpty } = require('jvh-is-empty');
 const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+const path = require('path');
 const PROD_FOLDER = 'star_lock_uploads_prod';
 const DEV_FOLDER = 'star_lock_uploads_dev';
 const CLOUDINARY_DIRECTORY = DEV_FOLDER;
@@ -26,8 +28,9 @@ exports.createResource = async (req, res, next) => {
             let imgArr = req.files;
             for (let img of imgArr) {
                 await cloudinary.uploader.upload(`images/${img.filename}`, {
-                    folder: CLOUDINARY_DIRECTORY,
-                    use_filename: true
+                    folder: CLOUDINARY_DIRECTORY, 
+                    public_id: img.filename,
+                    unique_filename: true
                 }, function (err, result) {
                     if (err) throw err;
                     resource.screenShots.push({ url: result.secure_url });
@@ -94,15 +97,14 @@ exports.fetchResource = (req, res, next) => {
 //! @route    PUT api/resource/update/:id
 //! @desc     Update a resource
 exports.updateResource = async (req, res, next) => {
-    
     let fetchedResource = await Resource.findById({ _id: req.params.id });
-    
+
     if (!fetchedResource) {
         return res.status(404).json({
             serverMsg: 'Could not find the resource you were looking for'
         });
     }
-    
+
     let resourceFields = {
         category: req.body.category,
         title: req.body.title,
@@ -122,14 +124,15 @@ exports.updateResource = async (req, res, next) => {
                 status: 404
             });
         }
-        
+
         // add the new images
         if (req.files.length > 0) {
             let imgArr = req.files;
             for (let img of imgArr) {
                 await cloudinary.uploader.upload(`images/${img.filename}`, {
                     folder: CLOUDINARY_DIRECTORY,
-                    use_filename: true
+                    use_filename: true,
+                    unique_filename: false
                 }, function (err, result) {
                     if (err) throw err;
                     item.screenShots.push({ url: result.secure_url });
@@ -142,6 +145,44 @@ exports.updateResource = async (req, res, next) => {
             resource: item
         });
     })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                serverMsg: 'There was a problem completing this request, please try again later.'
+            });
+        });
+};
+
+//! @route    DELETE api/resource/delete/:id
+//! @desc     Delete a resource
+exports.deleteResource = async (req, res, next) => {
+    let fetchedResource = await Resource.findById({ _id: req.params.id });
+    if (!fetchedResource) {
+        return res.status(404).json({
+            serverMsg: 'Could not find the resource you were looking for'
+        });
+    }
+
+    await Resource.findByIdAndDelete({ _id: req.params.id })
+        .then(async (item) => {
+            if (item.screenShots.length > 0 || !isEmpty(item.screenShots)) {
+                for (let screenShot of item.screenShots) {
+                    var productId = /[^/]*$/.exec(screenShot.url)[0];
+                    let filePath = /(.*)\.()/.exec(productId)[1];
+
+                    await cloudinary.uploader.destroy(`${CLOUDINARY_DIRECTORY}/${filePath}`, function (err, result) {
+                        if (err) throw err;
+                        console.log(result);
+                    });
+                    fs.unlink(path.join('images/' + filePath), (err) => {
+                        if (err) throw err;
+                    });
+                }
+            }
+            return res.status(201).json({
+                serverMsg: 'Successfully deleted resource'
+            });
+        })
         .catch((err) => {
             console.error(err);
             res.status(500).json({

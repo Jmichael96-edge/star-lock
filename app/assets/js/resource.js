@@ -211,6 +211,21 @@ const renderCurrentImgs = (currentImgArr) => {
     ` : `<h5 style="color: white; text-align: center;">All the images have been removed</h5>`;
 };
 
+// delete functionality 
+document.getElementById('deleteBtn').addEventListener('click', async () => {
+    await fetch(`/api/resource/delete/${id}`, {
+        method: 'DELETE'
+    }).then((res) => res.json()) 
+    .then(async (data) => {
+        await renderAlert(data.serverMsg, false);
+        setTimeout(() => {
+            window.location.href = `/`;
+        }, 2000);
+    }).catch((err) => {
+        console.log(err);
+    });
+});
+
 const renderAlert = async (msg, isErr) => {
     const alert = document.getElementById('formAlert');
     const iconWrap = document.getElementById('alertIconWrap');
