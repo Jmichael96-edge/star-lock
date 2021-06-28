@@ -149,7 +149,7 @@
 
 #editSaveBtn {}
 
-/** Modal */
+/* Modal */
 
 .modal {
     pointer-events: none;
@@ -162,7 +162,7 @@
     max-width: 20rem;
     margin: 0 auto;
     padding: 1.5rem;
-    background: #fff;
+    background: #500192;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 99;
@@ -181,11 +181,14 @@
 }
 
 /* modal text */
+
 #modalText {
     text-align: center;
     font-size: 1rem;
+    color: white;
 }
-/** Overlay */
+
+/* Overlay */
 
 .overlay {
     pointer-events: none;
@@ -201,10 +204,10 @@
     bottom: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/** JS */
+/* JS */
 
 .is-visible {
     opacity: 1;

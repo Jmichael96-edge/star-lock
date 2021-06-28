@@ -3,6 +3,10 @@ html body {
     padding: 0;
     height: 100%;
     box-sizing: border-box;
+    background-image: url('../images/bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 *, *:before, *:after {
@@ -61,4 +65,21 @@ html body {
     outline: none;
     cursor: pointer;
     border-radius: 3px;
+}
+
+/* general styling for all the buttons */
+.btn {
+    font-size: 1.2rem;
+    padding: .3rem;
+    border-radius: 4px;
+    border: 1px solid #47ff2f;
+    background-color: #47ff2f;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    transition: all .3s ease-in-out;
+}
+
+.btn:hover {
+   border: 1px solid black;
 }

@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const PROD_FOLDER = 'star_lock_uploads_prod';
 const DEV_FOLDER = 'star_lock_uploads_dev';
-const CLOUDINARY_DIRECTORY = DEV_FOLDER;
+const CLOUDINARY_DIRECTORY = PROD_FOLDER;
 
 cloudinary.config({
     cloud_name: 'edge-ofs',
