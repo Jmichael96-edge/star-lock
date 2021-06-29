@@ -11,6 +11,14 @@ window.addEventListener('load', async () => {
     if (id) {
         await fetchResource(id);
     }
+    let imgScreenShots = document.querySelectorAll('.screenShots');
+
+    Array.from(imgScreenShots).forEach(function (element) {
+        element.addEventListener('click', () => {
+            let src = element.attributes.src.value;
+            openImgViewer(src);
+        })
+    });
 });
 
 // fetch resource function
@@ -267,15 +275,33 @@ document.getElementById('overlay').addEventListener('click', function () {
     closeModal();
 });
 
+// close button for the image modal
+document.getElementById('closeImgModalBtn').addEventListener('click', () => {
+    closeImgViewer();
+})
 // open modal function
 const openModal = (text) => {
     document.getElementById('overlay').classList.add('is-visible');
     document.getElementById('modal').classList.add('is-visible');
-    document.getElementById('modalText').innerHTML = text
+    document.getElementById('modalText').innerHTML = text;
 };
 
 // close modal function
 const closeModal = () => {
     document.getElementById('overlay').classList.remove('is-visible');
     document.getElementById('modal').classList.remove('is-visible');
-}
+};
+
+// open image viewer 
+const openImgViewer = (src) => {
+    console.log(src);
+    document.getElementById('imgOverlay').classList.add('is-img-visible');
+    document.getElementById('imgModal').classList.add('is-img-visible');
+    document.getElementById('viewerImg').src = src;
+};
+
+// close image viewer
+const closeImgViewer = () => {
+    document.getElementById('imgOverlay').classList.remove('is-img-visible');
+    document.getElementById('imgModal').classList.remove('is-img-visible');
+};
