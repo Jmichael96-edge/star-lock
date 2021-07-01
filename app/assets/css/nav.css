@@ -1,7 +1,7 @@
 #nav {
     height: 4rem;
     width: 100%;
-    background-color: #58585800;
+    background-color: #0303038c;
     position: fixed;
     display: flex;
     align-items: center;
@@ -97,6 +97,7 @@
 
 .menuIconWrap {
     margin-left: auto;
+    z-index: 99;
 }
 
 /* menu icon for opening the mobile nav */
@@ -107,7 +108,7 @@
     margin: 0 1rem 0 0;
 }
 
-.overlay {
+.navOverlay {
     height: 100%;
     width: 0;
     position: fixed;

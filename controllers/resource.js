@@ -116,7 +116,6 @@ exports.updateResource = async (req, res, next) => {
         ghLink: req.body.ghLink,
         screenShots: JSON.parse(req.body.currentImgArr)
     };
-
     await Resource.findByIdAndUpdate(
         { _id: req.params.id },
         { $set: resourceFields },

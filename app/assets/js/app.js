@@ -52,6 +52,7 @@ const renderImages = (images) => {
     if (!images || images.length <= 0) {
         return ``;
     }
+     
     return images.map((img) => {
         return `<img src="${img.url}" class="screenShots" />`;
     }).join('');
@@ -96,4 +97,3 @@ document.querySelectorAll('.filterInput').forEach((el) => {
         }
     });
 });
-
