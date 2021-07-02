@@ -53,7 +53,7 @@ exports.createResource = async (req, res, next) => {
 //! @route    GET api/resource/all
 //! @desc     Fetch all resources
 exports.fetchAll = (req, res, next) => {
-    Resource.find()
+    Resource.find().sort({ date: -1 })
         .then((items) => {
             if (isEmpty(items)) {
                 return res.status(404).json({
