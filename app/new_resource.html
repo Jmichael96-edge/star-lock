@@ -42,24 +42,28 @@
 
     <article id="createWrapper">
         <form id="createForm">
-            <select id="category" name="category" class="input">
-                <option value="" selected>Select a category</option>
-                <option value="Resource">Resource</option>
-                <option value="Docs">Docs</option>
-                <option value="Best Practices">Best Practices</option>
-                <option value="Style Guide">Style Guide</option>
-                <option value="General">General</option>
-            </select>
-            <input placeholder="Title" name="title" class="input" id="title" type="text" />
-            <textarea rows="7" placeholder="Description" name="description" class="input" id="desc"
-                type="text"></textarea>
-            <input type="url" placeholder="Link to https://github.com" class="input" id="ghLink" name="ghLink" />
-            <input multiple class="input" style="border: none; padding: 0;" type="file" name="screenShots"
-                id="screenShots" />
-            <main id="uploadPrev" class="wrapper">
-
+            <main class="wrapper">
+                <select id="category" name="category" class="input">
+                    <option value="" selected>Select a category</option>
+                    <option value="Resource">Resource</option>
+                    <option value="Docs">Docs</option>
+                    <option value="Best Practices">Best Practices</option>
+                    <option value="Style Guide">Style Guide</option>
+                    <option value="General">General</option>
+                </select>
+                <input placeholder="Title" name="title" class="input" id="title" type="text" />
             </main>
-            <button id="submitBtn" class="btn" type="submit">CREATE RESOURCE</button>
+            <textarea rows="20" placeholder="Description" name="description" class="textarea" id="desc"
+                type="text"></textarea>
+            <main class="wrapper">
+                <input type="url" placeholder="Link to https://github.com" class="input" id="ghLink" name="ghLink" />
+                <input multiple class="input" style="border: none; padding: 0;" type="file" name="screenShots"
+                    id="screenShots" />
+            </main>
+            <main id="uploadPrev" class="wrapper"></main>
+            <main class="wrapper" style="justify-content: flex-end;">
+                <button id="submitBtn" class="btn" type="submit">CREATE RESOURCE</button>
+            </main>
         </form>
     </article>
 
