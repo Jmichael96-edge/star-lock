@@ -13,6 +13,10 @@
 
 /* title of the card */
 
+a {
+    text-decoration: none;
+}
+
 .resourceTitle {
     color: white;
     font-size: 1.4rem;

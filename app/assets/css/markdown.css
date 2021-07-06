@@ -5,3 +5,8 @@ h1 {
 a {
     color: #47ff2f;
 }
+
+code {
+    background-color: rgba(156, 156, 156, 0.788);
+    color: black;
+}

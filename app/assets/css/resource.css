@@ -20,7 +20,7 @@
 
 .resourceCard {
     width: 100%;
-    max-width: 60rem;
+    max-width: 70rem;
     height: auto;
     padding: 1rem;
     background-color: #500192;
@@ -91,9 +91,13 @@
 
 #editForm {
     width: 100%;
-    max-width: 40rem;
 }
 
+/* input containers */
+.inputContainer {
+    width: 100%;
+    max-width: 25rem;
+}
 /* labe for all the edit inputs */
 
 .editLabel {
@@ -104,6 +108,17 @@
 /* editing input elements */
 
 .editInput {
+    display: block;
+    width: 100%;
+    padding: .3rem;
+    border-radius: 4px;
+    border: 1px solid white;
+    outline: none;
+    font-size: 1rem;
+    margin-top: .5rem;
+}
+
+.editTextareaInput {
     display: block;
     width: 100%;
     padding: .3rem;
@@ -253,7 +268,6 @@
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
 }
-
 
 .imgOverlay {
     pointer-events: none;
